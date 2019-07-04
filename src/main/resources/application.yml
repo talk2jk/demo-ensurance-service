@@ -1,0 +1,10 @@
+logging:
+  level:
+    #ROOT: DEBUG
+    no.fremtind.insurance.insuranceprocessor: INFO
+
+spring:
+  application:
+    name: InsuranceContract processor
+server:
+  port: 8088
