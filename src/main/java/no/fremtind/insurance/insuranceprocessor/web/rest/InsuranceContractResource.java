@@ -58,6 +58,16 @@ public class InsuranceContractResource {
                 .body(result);
     }
 
+    @GetMapping("/insurances/{contractNumber}")
+    public ResponseEntity<ContractDto> getContract(@PathVariable String contractNumber) {
+        log.info("REST request to retrieve an insurance contract: {}", contractNumber);
+
+        InsuranceContract contract = insuranceContractService.findByContractNumber(contractNumber)
+                .orElseThrow(() -> new ContractNotFoundException(contractNumber));
+
+        return ResponseEntity.ok(ContractDto.from(contract));
+    }
+
     @PutMapping("/insurances/{contractNumber}/status")
     public ResponseEntity<ContractDto> update(@RequestBody ContractStatusUpdateDto dto, @PathVariable String contractNumber) {
         log.debug("REST request to update contract status: {}", dto);
